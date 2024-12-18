@@ -575,9 +575,9 @@
             'dev_requirement' => false,
         ),
         'nunomaduro/collision' => array(
-            'pretty_version' => 'v7.10.0',
-            'version' => '7.10.0.0',
-            'reference' => '49ec67fa7b002712da8526678abd651c09f375b2',
+            'pretty_version' => 'v7.11.0',
+            'version' => '7.11.0.0',
+            'reference' => '994ea93df5d4132f69d3f1bd74730509df6e8a05',
             'type' => 'library',
             'install_path' => __DIR__ . '/../nunomaduro/collision',
             'aliases' => array(),
