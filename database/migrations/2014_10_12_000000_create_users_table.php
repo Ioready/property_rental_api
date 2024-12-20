@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('trial_expire_date')->nullable();
             $table->integer('type')->default(0);
             $table->string('agent_id')->default(0);
+            $table->string('owner_id')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

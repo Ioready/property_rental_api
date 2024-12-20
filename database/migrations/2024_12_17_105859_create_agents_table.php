@@ -35,7 +35,7 @@ return new class extends Migration
             $table->string('ticket_subject')->nullable();
             $table->string('type')->nullable();
             $table->string('priority')->nullable();
-            $table->enum('status',['Initial Contact','Generated','Qualified'])->default('Initial Contact');;
+            $table->enum('status',['Initial Contact','Generated','Qualified'])->default('Initial Contact');
             $table->enum('approve_status',['approved','reject','pending'])->default('pending');;
             $table->timestamps();
         });

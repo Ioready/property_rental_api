@@ -16,6 +16,8 @@ use App\Http\Controllers\API\SystemController;
 use App\Http\Controllers\API\ReferralProgramController;
 use App\Http\Controllers\API\DoctorController;
 use App\Http\Controllers\API\AgentController;
+use App\Http\Controllers\API\OwnerController;
+use App\Http\Controllers\API\MaintenanceController;
 
 
 
@@ -28,7 +30,7 @@ Route::post('/password/confirm-otp', [RegisterController::class, 'confirmOtp']);
 
 Route::get('/password/reset', [RegisterController::class, 'reset'])->name('password.reset');
 Route::post('/password/reset', [RegisterController::class, 'reset']);
-
+// agent
 Route::get('/agent/list', [AgentController::class, 'index']);
 Route::post('/agent/add', [AgentController::class, 'store']);
 Route::get('/agent/view/{id}', [AgentController::class, 'show']);
@@ -36,6 +38,27 @@ Route::delete('/agent/delete/{id}', [AgentController::class, 'destroy']);
 Route::post('/agent/update/{id}', [AgentController::class, 'update']);
 Route::post('/agent/update_status/{id}', [AgentController::class, 'updateStatus']);
 Route::post('/agent/approve_agent/{id}', [AgentController::class, 'approveAgent']);
+
+// Owner route
+Route::get('/owner/list', [OwnerController::class, 'index']);
+Route::post('/owner/add_individual', [OwnerController::class, 'store']);
+Route::post('/owner/add_organization', [OwnerController::class, 'storeOrganization']);
+Route::get('/owner/view/{id}', [OwnerController::class, 'show']);
+Route::delete('/owner/delete/{id}', [OwnerController::class, 'destroy']);
+Route::post('/owner/update_individual/{id}', [OwnerController::class, 'update']);
+Route::post('/owner/update_organization/{id}', [OwnerController::class, 'updateOrganization']);
+Route::post('/owner/update_status/{id}', [OwnerController::class, 'updateStatus']);
+Route::post('/owner/assign_owner/{id}', [OwnerController::class, 'assignOwner']);
+
+// Maintenance route
+Route::get('/maintenance/list', [MaintenanceController::class, 'index']);
+Route::post('/maintenance/add', [MaintenanceController::class, 'store']);
+Route::get('/maintenance/view/{id}', [MaintenanceController::class, 'show']);
+Route::delete('/maintenance/delete/{id}', [MaintenanceController::class, 'destroy']);
+Route::post('/maintenance/update/{id}', [MaintenanceController::class, 'update']);
+Route::post('/maintenance/update_status/{id}', [MaintenanceController::class, 'updateStatus']);
+// Route::post('/maintenance/assign/{id}', [MaintenanceController::class, 'assignOwner']);
+
 
 // Route::post('/add/agent_by_auth', [AgentController::class, 'addAgentToAdmin'])->name('add_agent_auth');
 
@@ -50,17 +73,17 @@ Route::middleware('auth:api')->group(function () {
 
     Route::get('/superadmin/dashboard', [SuperAdminController::class, 'dashboard']);
 
-    Route::post('/superadmin/add_plans', [PlanController::class, 'addPlans']);
-    Route::get('/superadmin/all_plans', [PlanController::class, 'allPlans']);
-    Route::get('/superadmin/edit_plans/{id}', [PlanController::class, 'editPlans']);
-    Route::get('/superadmin/show-plans/{id}', [PlanController::class, 'showPlans']);
+    Route::post('/plans/add_plans', [PlanController::class, 'addPlans']);
+    Route::get('/plans/all_plans', [PlanController::class, 'allPlans']);
+    Route::get('/plans/edit_plans/{id}', [PlanController::class, 'editPlans']);
+    Route::get('/plans/show-plans/{id}', [PlanController::class, 'showPlans']);
+    Route::post('/plans/update_plans/{id}', [PlanController::class, 'updatePlans']);
+    Route::put('/plans/status_update_Plans/{id}', [PlanController::class, 'statusUpdatePlans']);
+    Route::delete('/plans/delete_plans/{id}', [PlanController::class, 'deletePlans']);
+    Route::get('/plans/active_plans', [PlanController::class, 'activePlans']);
+    Route::get('/plans/inactive_plans', [PlanController::class, 'inactivePlans']);
     
-    Route::post('/superadmin/update_plans/{id}', [PlanController::class, 'updatePlans']);
-    Route::put('/superadmin/status_update_Plans/{id}', [PlanController::class, 'statusUpdatePlans']);
-    Route::delete('/superadmin/delete_plans/{id}', [PlanController::class, 'deletePlans']);
-    Route::get('/superadmin/active_plans', [PlanController::class, 'activePlans']);
-    Route::get('/superadmin/inactive_plans', [PlanController::class, 'inactivePlans']);
-    
+
     Route::get('hospital-upgrade-plan/{id}', [HospitalController::class, 'upgradePlan'])->name('plan.upgrade');
     Route::get('hospital-upgrade/{id}/plan/{pid}', [HospitalController::class, 'hospitalUpgradePlan'])->name('plan.active');
 

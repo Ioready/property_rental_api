@@ -26,6 +26,8 @@ class User extends Authenticatable implements JWTSubject
         'role_id',
         'address',
         'phone_number',
+        'owner_id',
+        'agent_id',
         'module_permission', // Add this line
     ];
 
